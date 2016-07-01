@@ -1,0 +1,30 @@
+<IfModule mod_rewrite.c>
+  # !IMPORTANT! Set your RewriteBase here and don't forget trailing and leading
+  #  slashes.
+  # If your page resides at
+  #  http://www.example.com/mypage/test1
+  # then use
+  # RewriteBase /mypage/test1/
+  RewriteEngine On
+  RewriteBase /cereli
+
+  # Removes index.php from ExpressionEngine URLs
+  RewriteCond %{THE_REQUEST} ^GET.*index\.php [NC]
+  RewriteCond %{REQUEST_URI} !/system/.* [NC]
+  RewriteRule (.*?)index\.php/*(.*) /$1$2 [R=301,NE,L]
+
+  RewriteCond $1 !^(index\.php|images|robots\.txt)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ /index.php/$1 [L]
+</IfModule>
+
+ 
+
+<IfModule !mod_rewrite.c>
+  # If we don't have mod_rewrite installed, all 404's
+  # can be sent to index.php, and everything works as normal.
+  # Submitted by: ElliotHaughin
+ 
+  ErrorDocument 404 /index.php
+</IfModule>
