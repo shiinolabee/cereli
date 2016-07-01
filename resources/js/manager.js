@@ -48,7 +48,7 @@ Manager = {
 
 			console.log(this.base_url)	
 			$.ajax({
-				async:false,
+				async:true,
 				type:'post',				
 				dataType:'json',
 				url:this.base_url+url+content,
@@ -77,7 +77,7 @@ Manager = {
 		
 	__load_ajax_search : function(url,content,content_div){			
 			$.ajax({
-				async:false,
+				async:true,
 				type:'post',				
 				dataType:'json',
 				url:this.base_url+url,
@@ -472,7 +472,7 @@ Manager = {
 			var params = '/index.php/manager/time_record_details/'+action_type+'/'+values;			
 			
 			$.ajax({
-				async:false,
+				async:true,
 				type:'post',				
 				dataType:'json',
 				beforeSend:function(){
@@ -558,7 +558,7 @@ Manager = {
 			var params = '/index.php/manager/employee_details/'+id;			
 			
 			$.ajax({
-				async:false,
+				async:true,
 				type:'post',				
 				dataType:'json',
 				beforeSend:function(i,o){
@@ -581,7 +581,7 @@ Manager = {
 		
 		if(values){
 			$.ajax({
-				async:false,
+				async:true,
 				type:'post',
 				dataType:'json',
 				beforeSend:function(){
@@ -743,7 +743,7 @@ Manager = {
 			Manager.view_listing_type = elem.val();
 			
 			$.ajax({
-				async:false,
+				async:true,
 				type:'post',				
 				dataType:'json',
 				url:this.base_url+params+content,
@@ -902,7 +902,7 @@ Manager = {
 							var message_content = $('.dialog_message_content');							
 							
 							$.ajax({
-								async:false,
+								async:true,
 								type:'post',				
 								dataType:'json',
 								url:Manager.base_url+params+content,
@@ -933,7 +933,7 @@ Manager = {
 			var content = '/'+id+'/'+fullname+'/'+selectedDate;
 			
 			$.ajax({
-				async:false,
+				async:true,
 				type:'post',				
 				dataType:'json',
 				url:this.base_url+params+content,
@@ -964,7 +964,7 @@ Manager = {
 			var content_div = $('table#time-record-table-'+id+'');			
 			
 			$.ajax({
-				async:false,
+				async:true,
 				type:'post',				
 				dataType:'json',
 				url:this.base_url+params+content,
@@ -1017,7 +1017,7 @@ Manager = {
 			var params = '/index.php/manager/employee_change_thumbnail/set/';			
 			
 			$.ajax({
-				async:false,
+				async:true,
 				type:'post',				
 				dataType:'json',
 				url:this.base_url+params+id,			
@@ -1068,7 +1068,7 @@ Manager = {
 			var content = '*/'+emp_id;
 			
 			$.ajax({
-				async:false,
+				async:true,
 				type:'post',				
 				dataType:'json',
 				beforeSend:function(){
@@ -1122,7 +1122,7 @@ Manager = {
 			
 			if(data){
 				$.ajax({
-					async:false,
+					async:true,
 					dataType:'json',
 					data:{data:data},
 					type:'post',
@@ -1180,7 +1180,7 @@ Manager = {
 			
 			if(data){
 				$.ajax({
-					async:false,
+					async:true,
 					dataType:'json',
 					data:{data:data},
 					type:'post',
