@@ -29,7 +29,8 @@ Manager = {
 	** initialize content loading		
 	***/
 	init : function(){
-		this.base_url = '/cereli/';
+		// this.base_url = '/cereli/';
+		this.base_url = '';
 		this.message_content = $('.message_content');
 		this.__load();	
 	},
@@ -183,7 +184,7 @@ Manager = {
 					this.search_option_value = $('input[name="import-file"]').val().split('.')[0];
 				
 				if(this.search_option_value !== undefined && this.search_option_value !== ''){
-					var params = '/index.php/manager/action/'+type.val()+'/'+this.search_option_value+'/';						
+					var params = '/manager/action/'+type.val()+'/'+this.search_option_value+'/';						
 					var date_range = $('#trigger-csv-option-datepicker-from').val()+'*'+$('#trigger-csv-option-datepicker-to').val();
 					if(type.val() == 'export'){	
 					
@@ -204,7 +205,7 @@ Manager = {
 								
 								if(typeof selected_employees != 'undefined' && selected_employees != ''){
 								
-									var params = '/index.php/manager/action/export-multiple/csv/';
+									var params = '/manager/action/export-multiple/csv/';
 									var date_range = $('#trigger-csv-option-datepicker-from').val()+'*'+$('#trigger-csv-option-datepicker-to').val();
 									elem.attr('href',this.base_url+params+selected_employees+'/'+date_range);									
 									elem.submit();									
@@ -322,7 +323,7 @@ Manager = {
 		var data_query = 'SELECT * FROM employees ';
 		var delimiter = 'AND ';
 		var condition = 'WHERE ';
-		this.search_params = '/index.php/manager/action/search/';
+		this.search_params = '/manager/action/search/';
 		
 		if(field_search.emp_id != null)		
 			data_query = data_query + 'WHERE emp_id = "'+field_search.emp_id+'"';			
@@ -400,7 +401,7 @@ Manager = {
 								time_record_details.date_attended = time_record.parent().find('input#date_attended').val();												
 								time_record_details.remarks = time_record.parent().find('textarea[name="remarks"]').val();	
 																
-								Manager.__dialog_action('/index.php/manager/action/','update_time_record',time_record_details,time_record_details.record_id);						
+								Manager.__dialog_action('/manager/action/','update_time_record',time_record_details,time_record_details.record_id);						
 							},
 							"Close" : function(){
 								$(this).dialog('close');								
@@ -443,7 +444,7 @@ Manager = {
 									transfer_time_record_details.record_id = transfer_time_record.parent().find('input[name="record_id"]').val();
 									transfer_time_record_details.emp_id = transfer_time_record.parent().find('select[name="emp_id"]').val();
 																					
-									Manager.__dialog_action('/index.php/manager/action/','transfer_time_record',transfer_time_record_details,transfer_time_record_details.record_id);														
+									Manager.__dialog_action('/manager/action/','transfer_time_record',transfer_time_record_details,transfer_time_record_details.record_id);														
 								}
 							},
 							"Close" : function(){
@@ -469,7 +470,7 @@ Manager = {
 				}else return false;
 			}
 			
-			var params = '/index.php/manager/time_record_details/'+action_type+'/'+values;			
+			var params = '/manager/time_record_details/'+action_type+'/'+values;			
 			
 			$.ajax({
 				async:true,
@@ -543,7 +544,7 @@ Manager = {
 							employee_details.overtime = employee.parent().find('textarea[name="overtime"]').val();
 							employee_details.record_status = employee.parent().find('select[name="record_status"]').val();
 							
-							Manager.__dialog_action('/index.php/manager/action/','update',employee_details,employee_details.id);						
+							Manager.__dialog_action('/manager/action/','update',employee_details,employee_details.id);						
 						},
 						"Close" : function(){
 							$(this).dialog('close');					
@@ -555,7 +556,7 @@ Manager = {
 				var dialog_instance = $('#dialog_employee_details');
 			
 			
-			var params = '/index.php/manager/employee_details/'+id;			
+			var params = '/manager/employee_details/'+id;			
 			
 			$.ajax({
 				async:true,
@@ -602,10 +603,10 @@ Manager = {
 	
 	__calendar_search : function(date){
 		var elem = $(date),date = '';
-	
+		
 		if(elem.val() != ''){
 			date = elem.val().split('/').join('-');
-			var params = '/index.php/manager/employee_time_record/';
+			var params = '/manager/employee_time_record/';
 			var content = '*/'+this.page_limit+'/'+this.page_offset+'/';
 			
 			this.__load_ajax('content',params+content,date,this.current_load_content);
@@ -644,7 +645,7 @@ Manager = {
 			error += 'Enter first "to" date.';
 		
 		if(this.date_search_from != '' && this.date_search_to != ''){
-			var params = '/index.php/manager/employee_time_record/';
+			var params = '/manager/employee_time_record/';
 			var content = '*/'+this.page_limit+'/'+this.page_offset+'/';
 			date = this.date_search_from+'/'+this.date_search_to;
 					
@@ -664,7 +665,7 @@ Manager = {
 	__sort_action : function(type,id,month_attended){
 		
 		if(type != null && id != null){			
-			var params = '/index.php/manager/action/fetch_time_record/'
+			var params = '/manager/action/fetch_time_record/'
 			var content = type+'/'+id+'/'+month_attended;
 			var content_div = $('table#time-record-table-'+id+'');
 			this.__load_ajax('content',params,content,content_div);
@@ -674,7 +675,7 @@ Manager = {
 	__sort_employee_action : function(type){
 		
 		if(type != null){
-			var params = '/index.php/manager/action/fetch_employees/'
+			var params = '/manager/action/fetch_employees/'
 			var content = '*/*/'+type;
 			var content_div = $('.load-content');
 			this.__load_ajax('content',params,content,content_div);
@@ -727,9 +728,9 @@ Manager = {
 			Manager.page_offset = elem.val();
 			
 			if(type == 'home')
-				window.location.href = this.base_url+'/index.php/manager/index/'+Manager.page_offset+'/0';
+				window.location.href = this.base_url+'/manager/index/'+Manager.page_offset+'/0';
 			else if(type == 'employees')
-				window.location.href = this.base_url+'/index.php/manager/employees/'+Manager.page_offset+'/0';			
+				window.location.href = this.base_url+'/manager/employees/'+Manager.page_offset+'/0';			
 		}
 	},
 	
@@ -738,7 +739,7 @@ Manager = {
 		
 		Manager.view_listing_type = elem.val();
 		if(elem.val() != ''){
-			var params = '/index.php/manager/change_view_listing/';
+			var params = '/manager/change_view_listing/';
 			var content = elem.val()+this.current_load_content.attr('data-content');		
 			Manager.view_listing_type = elem.val();
 			
@@ -807,7 +808,7 @@ Manager = {
 	__employee_get_attended_dates : function(id){
 		
 		if(id != ''){
-			var params = '/index.php/manager/employee_attended_dates/'+id;
+			var params = '/manager/employee_attended_dates/'+id;
 			$.ajax({
 				dataType:'json',
 				type:'get',
@@ -897,7 +898,7 @@ Manager = {
 							if(type == 'undefined')
 								type = 'default';
 								
-							var params = '/index.php/manager/create_employee_time_record/save';
+							var params = '/manager/create_employee_time_record/save';
 							var content = '/'+emp_id+'/'+'*/'+date_attended+'/'+remarks+'/'+type;
 							var message_content = $('.dialog_message_content');							
 							
@@ -929,7 +930,7 @@ Manager = {
 			}else	
 				var dialog_instance = $('#dialog_create_time_record');
 				
-			var params = '/index.php/manager/create_employee_time_record/set';
+			var params = '/manager/create_employee_time_record/set';
 			var content = '/'+id+'/'+fullname+'/'+selectedDate;
 			
 			$.ajax({
@@ -958,7 +959,7 @@ Manager = {
 	__get_employee_time_records : function(changeYear,changeMonth,id){
 		
 		if(changeYear != '' && changeMonth != '' && id != ''){
-			var params = '/index.php/manager/action/fetch_employee_time_record_on_change_date/';
+			var params = '/manager/action/fetch_employee_time_record_on_change_date/';
 			var date = new Date(changeYear,changeMonth-1).toString('yyyy-MM');
 			var content = date+'/'+id;
 			var content_div = $('table#time-record-table-'+id+'');			
@@ -1014,7 +1015,7 @@ Manager = {
 			}else	
 				var dialog_instance = $('#dialog_employee_change_thumbnail');
 				
-			var params = '/index.php/manager/employee_change_thumbnail/set/';			
+			var params = '/manager/employee_change_thumbnail/set/';			
 			
 			$.ajax({
 				async:true,
@@ -1043,7 +1044,7 @@ Manager = {
 		var employee_change_thumbnail_result_content = $('.employee-change-thumbnail-result-content');
 		
 		// $('#form-change-thumbnail').ajaxForm({
-			// url: Manager.base_url+'/index.php/manager/employee_change_thumbnail/change/'+id,
+			// url: Manager.base_url+'/manager/employee_change_thumbnail/change/'+id,
 			// type: 'post',
 			// dataType:'json',																
 			// success: function(data) {
@@ -1064,7 +1065,7 @@ Manager = {
 	__calculate_total_hours_rendered_and_others : function(emp_id){
 		var content_div = $('#tab-result-'+emp_id+'');
 		if(emp_id != ''){
-			var params = '/index.php/manager/action/fetch_employee_total_hours_rendered_and_others/'
+			var params = '/manager/action/fetch_employee_total_hours_rendered_and_others/'
 			var content = '*/'+emp_id;
 			
 			$.ajax({
@@ -1113,7 +1114,7 @@ Manager = {
 			form.parent().find('span#cancel-btn-'+id).fadeOut('fast');	
 			$('span#save-btn-'+id).fadeOut('fast');
 		}else if(action == 'save'){			
-			var params = '/index.php/manager/save_time_record_rules/';
+			var params = '/manager/save_time_record_rules/';
 			var data = {};
 			data.id = form.parent().find('input[type="hidden"][name="id"]').val();
 			data.required_hours_rendered = form.parent().find('input[type="text"][name="required_hours_rendered"]').val();
@@ -1169,7 +1170,7 @@ Manager = {
 			form.parent().find('#company-cancel-btn-'+id).fadeOut('fast');		
 			form.parent().find('#company-save-btn-'+id).fadeOut('fast');		
 		}else if(action == 'save'){			
-			var params = '/index.php/manager/save_company_details/';
+			var params = '/manager/save_company_details/';
 			var data = {};
 			data.id = form.parent().find('input[type="hidden"][name="id"]').val();
 			data.company_name = form.parent().find('input[type="text"][name="company_name"]').val();
@@ -1290,7 +1291,7 @@ Manager = {
 	__delete_all_employee_time_records : function(){
 		
 		if(confirm("Deleting all employee time records will be permanent and cannot be retrieved. Are you sure to proceed this operation?")){
-			var params = '/index.php/manager/action_employee_time_records/delete_all';
+			var params = '/manager/action_employee_time_records/delete_all';
 			$.ajax({
 				type:"get",
 				url: Manager.base_url+params,

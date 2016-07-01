@@ -17,7 +17,7 @@
 		
 			parent::__construct();
 			date_default_timezone_set('Asia/Manila');
-			$this->base_url = '/cereli';
+			$this->base_url = '';
 			$this->load->database();
 			$this->load->library('pagination');
 			$this->load->model(array('TimeManager')); // require the model TimeManger class
@@ -55,7 +55,7 @@
 			$this->recent_activities_offset = $offset;
 			$this->process_logs_home();
 			
-			$this->initializePagination('/cereli/index.php/manager/index/'.$offset,$this->db->query("SELECT * FROM employee_activities")->num_rows(),$offset);	
+			$this->initializePagination('/manager/index/'.$offset,$this->db->query("SELECT * FROM employee_activities")->num_rows(),$offset);	
 			$this->load->view('index',$this->params);
 		}		
 
@@ -136,7 +136,7 @@
 			$this->employee_offset = $offset;
 			$this->process_employee_actions();
 			
-			$this->initializePagination('/cereli/index.php/manager/employees/'.$offset,$this->db->query("SELECT * FROM employees")->num_rows(),$offset);
+			$this->initializePagination('/manager/employees/'.$offset,$this->db->query("SELECT * FROM employees")->num_rows(),$offset);
 			$this->load->view('employees');
 		}
 		
@@ -216,7 +216,7 @@
 								</div>
 								<div class="message_content"></div>
 								<div class="import-container">
-									<form action="'.$this->base_url.'/index.php/manager/action/import/" id="form-import" method="post" enctype="multipart/form-data">
+									<form action="'.$this->base_url.'/manager/action/import/" id="form-import" method="post" enctype="multipart/form-data">
 										<label>Select a file :</label>
 										<input type="file" name="import-file" id="import-file"/>
 										<span class="file-input-label"></span>
