@@ -801,14 +801,11 @@
 										5=>$row2->time_6									
 									);
 								
-								$time_values = $this->checkIfNotEmpty($time_values);	
-
-								$timeFormat = sizeof($time_values) > 0 ? $this->defaultFormat('g:i a',$time_values[0],'time').' - '.$this->defaultFormat('g:i a',$time_values[(count($time_values)-1)],'time') : 'Time not specified on';
-
+								$time_values = $this->checkIfNotEmpty($time_values);		
 								$results['contents'] .= '
 									<div class="time-record-field-container">
 										<div class="time-record-field-info note transfer-time-record-field-info">
-											Time record details: '.$timeFormat.' '.$this->defaultFormat('M d Y',$row2->date_attended).'
+											Time record details: '.$this->defaultFormat('g:i a',$time_values[0],'time').' - '.$this->defaultFormat('g:i a',$time_values[(count($time_values)-1)],'time').' '.$this->defaultFormat('M d Y',$row2->date_attended).'
 										</div>								
 									</div>								
 								';						
@@ -1653,7 +1650,6 @@
 						$counter = 0;
 						$insert_data = array();	
 						$row = 0;
-		
 						while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
 						
 							if($this->row == 1){								
@@ -1711,11 +1707,7 @@
 							$counter++;
 						}				
 
-						fclose($handle);	
-
-						// echo "<pre>";
-						// print_r($insert_data_employee);					
-						// echo "</pre>";					
+						fclose($handle);						
 
 						foreach($insert_data as $key => $value) {	
 

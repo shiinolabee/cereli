@@ -22,7 +22,7 @@
 							';					
 					}
 				?>
-				<div class="load-content" data-url="/manager/employee_time_record" data-content="<?php echo '/*/'.$this->employee_limit.'/'.$this->employee_offset;?>">Loading content...</div>
+				<div class="load-content" data-url="index.php/manager/employee_time_record" data-content="<?php echo '/*/'.$this->employee_limit.'/'.$this->employee_offset;?>">Loading content...</div>
 			</div>
 			<div class="queue-export-content-container">
 				<div class="queue-export-content-label">
